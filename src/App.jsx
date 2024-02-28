@@ -9,7 +9,7 @@ function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [Email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
 
   return (
     <>
@@ -74,7 +74,10 @@ function App() {
           type="submit"
           onClick={(event) => {
             event.preventDefault();
-            console.log("Submit clicked!");
+            const newContact = { firstName, lastName, phoneNumber, email };
+
+            const updatedContacts = [...contacts, newContact];
+            setContacts(updatedContacts);
           }}
         >
           Create Contact
