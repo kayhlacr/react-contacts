@@ -76,8 +76,6 @@ export default function ContactForm({ onFormSubmissionHandler }) {
           event.preventDefault();
           const newContact = { firstName, lastName, phoneNumber, email };
           onFormSubmissionHandler(newContact);
-          const updatedContacts = [...contacts, newContact];
-          setContacts(updatedContacts);
         }}
       >
         Create Contact
