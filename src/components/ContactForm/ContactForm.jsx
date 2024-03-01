@@ -9,7 +9,14 @@ export default function ContactForm({ onFormSubmissionHandler }) {
   const [email, setEmail] = useState("");
 
   return (
-    <form className="form-container">
+    <form
+      className="form-container"
+      onSubmit={(event) => {
+        event.preventDefault();
+        const newContact = { firstName, lastName, phoneNumber, email };
+        onFormSubmissionHandler(newContact);
+      }}
+    >
       <label>
         First Name:{" "}
         <input
@@ -19,6 +26,7 @@ export default function ContactForm({ onFormSubmissionHandler }) {
             const value = event.target.value;
             setFirstName(value);
           }}
+          required
         />
       </label>
       <label>
@@ -30,6 +38,7 @@ export default function ContactForm({ onFormSubmissionHandler }) {
             const value = event.target.value;
             setLastName(value);
           }}
+          required
         />
       </label>
       <label>
@@ -51,10 +60,12 @@ export default function ContactForm({ onFormSubmissionHandler }) {
           ]}
           guide={true}
           className="form-input"
+          pattern="\d{3}-\d{3}-\d{4}"
           onChange={(event) => {
             const value = event.target.value;
             setPhoneNumber(value);
           }}
+          required
         />
       </label>
       <label>
@@ -62,22 +73,14 @@ export default function ContactForm({ onFormSubmissionHandler }) {
         <input
           type="email"
           className="form-input"
-          pattern=".+@example\.com"
           onChange={(event) => {
             const value = event.target.value;
             setEmail(value);
           }}
+          required
         ></input>
       </label>
-      <button
-        className="form-button"
-        type="submit"
-        onClick={(event) => {
-          event.preventDefault();
-          const newContact = { firstName, lastName, phoneNumber, email };
-          onFormSubmissionHandler(newContact);
-        }}
-      >
+      <button className="form-button" type="submit">
         Create Contact
       </button>
     </form>
