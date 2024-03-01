@@ -1,7 +1,7 @@
 import ContactCard from "../ContactCard/ContactCard";
 import "./ContactList.css";
 
-export default function ContactList({ contacts }) {
+export default function ContactList({ contacts, onCardDeleteClick }) {
   return (
     <ul className="contact-list">
       {contacts &&
@@ -12,6 +12,7 @@ export default function ContactList({ contacts }) {
               name={`${contact.firstName} ${contact.lastName}`}
               phone={contact.phoneNumber}
               email={contact.email}
+              onDeleteClick={onCardDeleteClick}
             />
           );
         })}

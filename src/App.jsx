@@ -20,12 +20,21 @@ function App() {
           });
 
           if (isEmailOrPhoneInContacts) return;
+
           const updatedContacts = [...contacts, newContact];
           setContacts(updatedContacts);
         }}
       />
 
-      <ContactList contacts={contacts} />
+      <ContactList
+        contacts={contacts}
+        onCardDeleteClick={(phoneNumber) => {
+          const updatedContacts = contacts.filter((contact) => {
+            return contact.phoneNumber !== phoneNumber;
+          });
+          setContacts(updatedContacts);
+        }}
+      />
     </>
   );
 }
