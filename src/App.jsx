@@ -12,6 +12,14 @@ function App() {
       <h1>React Contacts</h1>
       <ContactForm
         onFormSubmissionHandler={(newContact) => {
+          const isEmailOrPhoneInContacts = contacts.some((contact) => {
+            return (
+              contact.phoneNumber === newContact.phoneNumber ||
+              contact.email.toLowerCase() === newContact.email.toLowerCase()
+            );
+          });
+
+          if (isEmailOrPhoneInContacts) return;
           const updatedContacts = [...contacts, newContact];
           setContacts(updatedContacts);
         }}
