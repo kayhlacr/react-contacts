@@ -7,6 +7,11 @@ import ContactForm from "./components/ContactForm/ContactForm";
 function App() {
   const [contacts, setContacts] = useState(dummyContacts);
   const [searchText, setSearchText] = useState("");
+  const displayedContacts = contacts.filter((contact) => {
+    const lowerCaseName = `
+      ${contact.firstName} ${contact.lastName}`.toLowerCase();
+    return lowerCaseName.includes(searchText.toLowerCase());
+  });
 
   return (
     <>
@@ -34,21 +39,9 @@ function App() {
           type="text"
           placeholder="search-contacts"
         />
-        <button
-          onClick={() => {
-            const updatedContacts = contacts.filter((contact) => {
-              const lowerCaseName = `
-                ${contact.firstName} ${contact.lastName}`.toLowerCase();
-              return lowerCaseName.includes(searchText.toLowerCase());
-            });
-            setContacts(updatedContacts);
-          }}
-        >
-          Search
-        </button>
       </div>
       <ContactList
-        contacts={contacts}
+        contacts={displayedContacts}
         onCardDeleteClick={(phoneNumber) => {
           const updatedContacts = contacts.filter((contact) => {
             return contact.phoneNumber !== phoneNumber;
